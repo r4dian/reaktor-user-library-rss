@@ -2,7 +2,7 @@
 import sys,os
 import urllib.request
 
-# add the path for virtual env for running via cron
+# add the path for virtualenv for running via cron
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/lib/python3.9/site-packages/')
 
@@ -58,7 +58,7 @@ def diff(old,new):
     b = set(new.select("item"))
     c = b-a
     for i in c:
-        # tweet(i)
+        # tweet(i)  # TODO this used to tweet newly discovered items on @reaktor_lib when run, but I lost the passoword to that account (see keys.py)
         pass
 
 def tweet(item):
