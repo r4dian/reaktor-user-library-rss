@@ -3,3 +3,5 @@ There used to be an RSS feed for new uploads on [the Reaktor User Library](http:
 Feed available [here](http://radian.sdfeu.org/reaktor_library_rss.php)
 
 TODO: I also used to tweet the uploads [here](https://twitter.com/reaktor_lib) but I've lost the keys / forgotten the password.
+
+run via cron like `python3 /path/to/main.py /path/to/output.php`
