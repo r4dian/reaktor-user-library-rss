@@ -4,4 +4,4 @@ Feed available [here](http://radian.sdf-eu.org/reaktor_library_rss.php)
 
 TODO: I also used to tweet the uploads [here](https://twitter.com/reaktor_lib) but ~I've lost the keys / forgotten the password.~ the fucker who owns twitter now deleted it. 
 
-run via cron like `python3 /path/to/main.py /path/to/output.php`
+Run via `runner.sh` or use cron.

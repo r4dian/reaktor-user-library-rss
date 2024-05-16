@@ -10,7 +10,7 @@
 echo 'Running the Reaktor lib RSS update process.'
 
 while true; do
-	. NI-rss-venv/bin/activate
+    . NI-rss-venv/bin/activate
     python main.py ~/html/reaktor_library_rss.php
     deactivate
     # sleep  6   hours
