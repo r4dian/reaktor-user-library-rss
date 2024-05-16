@@ -7,8 +7,12 @@
 #
 # https://stackoverflow.com/questions/42801100/how-to-run-scheduled-scripts-on-linux-without-using-cron
 
+echo 'Running the Reaktor lib RSS update process.'
+
 while true; do
+	. NI-rss-venv/bin/activate
     python main.py ~/html/reaktor_library_rss.php
-    # sleep 6 hours
+    deactivate
+    # sleep  6   hours
     sleep $((6 * 60 * 60))
 done

@@ -80,8 +80,8 @@ def tweet(item):
 
 
 if __name__ == "__main__":
-    old = BeautifulSoup(open(sys.argv[1]), features="html.parser")
+    print ('Updating the NI Reaktor User Library feed.')
+    # old = BeautifulSoup(open(sys.argv[1]), features="html.parser")
     generate(sys.argv[1])
-    new = BeautifulSoup(open(sys.argv[1]), features="html.parser")
-    diff(old,new)
-
+    # new = BeautifulSoup(open(sys.argv[1]), features="html.parser")
+    # diff(old,new)
