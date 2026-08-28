@@ -27,7 +27,7 @@ USER_AGENT = (
 )
 
 HEADER = """<?php header('Content-Type: application/rss+xml; charset=UTF-8'); ?><?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Reaktor User Library</title>
     <link>https://userlibrary.native-instruments.com/reaktor</link>
@@ -99,6 +99,22 @@ def description_for(item):
     return "<br/>".join(parts)
 
 
+def image_mime_type(url):
+    """Guess a MIME type from a cover image URL extension."""
+    if not url:
+        return None
+    url = url.lower()
+    if url.endswith(".png"):
+        return "image/png"
+    if url.endswith((".jpg", ".jpeg")):
+        return "image/jpeg"
+    if url.endswith(".gif"):
+        return "image/gif"
+    if url.endswith(".webp"):
+        return "image/webp"
+    return None
+
+
 def item_xml(item):
     """Render one library item as an RSS <item> element."""
     title = escape(clean_text(item.get("title")))
@@ -109,12 +125,24 @@ def item_xml(item):
     pub_date = rfc822(item.get("createdAt"))
     date_line = ("      <pubDate>%s</pubDate>\n" % pub_date) if pub_date else ""
 
+    media_lines = ""
+    cover = item.get("coverImage")
+    if cover:
+        media_lines += "      <media:thumbnail url=%s />\n" % quoteattr(cover)
+        mime = image_mime_type(cover)
+        if mime:
+            media_lines += (
+                "      <media:content url=%s medium=\"image\" type=\"%s\" />\n"
+                % (quoteattr(cover), mime)
+            )
+
     return (
         "    <item>\n"
         f"      <title>{title}</title>\n"
         f"      <link>{link_esc}</link>\n"
         f'      <guid isPermaLink="true">{link_esc}</guid>\n'
         f"{date_line}"
+        f"{media_lines}"
         f"      <description>{description}</description>\n"
         "    </item>\n"
     )
