@@ -31,7 +31,7 @@ HEADER = """<?php header('Content-Type: application/rss+xml; charset=UTF-8'); ?>
   <channel>
     <title>Reaktor User Library</title>
     <link>https://userlibrary.native-instruments.com/reaktor</link>
-    <atom:link href="<?php echo "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" rel="self" type="application/rss+xml" />
+    <atom:link href="<?php echo ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>" rel="self" type="application/rss+xml" />
     <description>Latest uploads to the Native Instruments Reaktor User Library</description>
     <language>en</language>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
@@ -143,7 +143,7 @@ def item_xml(item):
         f'      <guid isPermaLink="true">{link_esc}</guid>\n'
         f"{date_line}"
         f"{media_lines}"
-        f"      <description>{description}</description>\n"
+        f"      <description><![CDATA[{description}]]></description>\n"
         "    </item>\n"
     )
 
